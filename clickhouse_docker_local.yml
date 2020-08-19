@@ -1,0 +1,53 @@
+---
+- name: Up & Run the Clickhouse Server in Docker
+  hosts: 127.0.0.1
+  gather_facts: false
+  vars:
+    clickhouse_container: ch
+
+  pre_tasks:
+
+    - name: Gather container info
+      docker_container_info:
+        name: '{{ clickhouse_container }}'
+      register: result
+
+    - fail:
+        msg: Container with name '{{ clickhouse_container }}' already exists
+      when: result.exists
+    
+    - name: Up & Run container with Clickhouse
+      docker_container:
+        image: yandex/clickhouse-server:20
+        name: '{{ clickhouse_container }}'
+        ports: 127.0.0.1:9000:9000
+        env:
+          DEBIAN_FRONTEND: noninteractive
+
+    - name: Add host to inventory
+      add_host:
+        hostname: '{{ clickhouse_container }}'
+        ansible_connection: docker
+        ansible_python_interpreter: /usr/bin/python3
+
+    - name: Install python3 & lxml
+      raw: >
+        apt update &&
+        apt install -y python3 python3-lxml
+      delegate_to: '{{ clickhouse_container }}'
+
+  tasks:
+
+    - name: Grant default user ability to create new users
+      xml:
+        path: /etc/clickhouse-server/users.xml
+        xpath: /yandex/users/default/access_management
+        value: '1'
+      delegate_to: '{{ clickhouse_container }}'
+
+  post_tasks:
+    
+    - name: Remove python3 & lxml
+      raw: apt remove -y python3 python3-lxml
+      delegate_to: '{{ clickhouse_container }}'
+...
