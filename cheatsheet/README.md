@@ -1,6 +1,4 @@
-# An Ansible summary
-
-Jon Warbrick, July 2014, V3.2 (for Ansible 1.7)
+# Ansible 2.10 cheatsheet
 
 # Configuration file
 
@@ -100,16 +98,6 @@ Playbooks consist of a list of one or more 'plays' and/or inclusions:
 
 ## Plays
 
-[playbooks\_intro.html](http://docs.ansible.com/playbooks_intro.html),
-[playbooks\_roles.html](http://docs.ansible.com/playbooks_roles.htm),
-[playbooks\_variables.html](http://docs.ansible.com/playbooks_variables.html),
-[playbooks\_conditionals.html](http://docs.ansible.com/playbooks_conditionals.html),
-[playbooks\_acceleration.html](http://docs.ansible.com/playbooks_acceleration.html),
-[playbooks\_delegation.html](http://docs.ansible.com/playbooks_delegation.html),
-[playbooks\_prompts.html](http://docs.ansible.com/playbooks_prompts.html),
-[playbooks\_tags.html](http://docs.ansible.com/playbooks_tags.htm)
-[Forum posting](https://groups.google.com/forum/#!topic/ansible-project/F9mIAfo6orc)
-[Forum postinb](https://groups.google.com/forum/#!topic/Ansible-project/MU_ws7zynnI)
     
 Plays consist of play metadata and a sequence of task and handler
 definitions, and roles.
@@ -174,6 +162,17 @@ definitions, and roles.
         - <task>
         - ...
 
+- [playbooks\_intro.html](http://docs.ansible.com/playbooks_intro.html)
+- [playbooks\_roles.html](http://docs.ansible.com/playbooks_roles.htm)
+- [playbooks\_variables.html](http://docs.ansible.com/playbooks_variables.html)
+- [playbooks\_conditionals.html](http://docs.ansible.com/playbooks_conditionals.html)
+- [playbooks\_acceleration.html](http://docs.ansible.com/playbooks_acceleration.html)
+- [playbooks\_delegation.html](http://docs.ansible.com/playbooks_delegation.html)
+- [playbooks\_prompts.html](http://docs.ansible.com/playbooks_prompts.html)
+- [playbooks\_tags.html](http://docs.ansible.com/playbooks_tags.htm)
+- [Forum posting](https://groups.google.com/forum/#!topic/ansible-project/F9mIAfo6orc)
+- [Forum postinb](https://groups.google.com/forum/#!topic/Ansible-project/MU_ws7zynnI)
+
 Using `encrypt` with `vars_prompt` requires that
 [Passlib](http://pythonhosted.org/passlib/) is installed.
 
@@ -190,7 +189,7 @@ name: task
 
 <a href="task/action.md" title="The ‘action’ to execute for a task, it normally translates into a C(module) or action plugin.">
 <pre>
-action: <module>, src=template.j2 dest=/etc/foo.conf
+action: &lt;module&gt;, src=template.j2 dest=/etc/foo.conf
 </pre>
 </a>
 
@@ -450,17 +449,17 @@ with_&lt;lookup_plugin&gt;
 </a>
 
 
-[playbooks\_intro.html](http://docs.ansible.com/playbooks_intro.html),
-[playbooks\_roles.html](http://docs.ansible.com/playbooks_roles.html),
-[playbooks\_async.html](http://docs.ansible.com/playbooks_async.html),
-[playbooks\_checkmode.html](http://docs.ansible.com/[playbooks_checkmode.html),
-[playbooks\_delegation.html](http://docs.ansible.com/playbooks_delegation.html),
-[playbooks\_environment.html](http://docs.ansible.com/playbooks_environment.html),
-[playbooks\_error_handling.html](http://docs.ansible.com/playbooks_error_handling.html),
-[playbooks\_tags.html](http://docs.ansible.com/playbooks_tags.html)
-[ansible-1-5-released](http://www.ansible.com/blog/2014/02/28/ansible-1-5-released)
-[Forum posting](https://groups.google.com/forum/#!topic/ansible-project/F9mIAfo6orc)
-[Ansible examples](https://github.com/ansible/ansible-examples/blob/master/language_features/complex_args.yml)
+- [playbooks\_intro.html](http://docs.ansible.com/playbooks_intro.html)
+- [playbooks\_roles.html](http://docs.ansible.com/playbooks_roles.html)
+- [playbooks\_async.html](http://docs.ansible.com/playbooks_async.html)
+- [playbooks\_checkmode.html](http://docs.ansible.com/[playbooks_checkmode.html)
+- [playbooks\_delegation.html](http://docs.ansible.com/playbooks_delegation.html)
+- [playbooks\_environment.html](http://docs.ansible.com/playbooks_environment.html)
+- [playbooks\_error_handling.html](http://docs.ansible.com/playbooks_error_handling.html)
+- [playbooks\_tags.html](http://docs.ansible.com/playbooks_tags.html)
+- [ansible-1-5-released](http://www.ansible.com/blog/2014/02/28/ansible-1-5-released)
+- [Forum posting](https://groups.google.com/forum/#!topic/ansible-project/F9mIAfo6orc)
+- [Ansible examples](https://github.com/ansible/ansible-examples/blob/master/language_features/complex_args.yml)
 
 
 # Roles
