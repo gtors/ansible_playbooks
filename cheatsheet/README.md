@@ -338,7 +338,11 @@ loop
 
 <a href="task/loop_control.md" title="Several keys here allow you to modify/set loop behaviour in a task.">
 <pre>
-loop_control
+loop_control:
+  loop_var: my_item
+  index_var: my_idx
+  pause: 3
+  label: "{{ my_item.name }}"
 </pre>
 </a>
 
