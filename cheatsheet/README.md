@@ -277,7 +277,7 @@ debugger
 
 <a href="task/delay.md" title="Number of seconds to delay between retries. This setting is only used in combination with until.">
 <pre>
-delay 
+delay: 10
 </pre>
 </a>
 
@@ -394,7 +394,7 @@ remote_user: apache
 
 <a href="task/retries.md" title="Number of retries before giving up in a until loop. This setting is only used in combination with until.">
 <pre>
-retries
+retries: 5
 </pre>
 </a>
 
@@ -420,7 +420,7 @@ throttle
 
 <a href="task/until.md" title="This keyword implies a ‘retries loop’ that will go on until the condition supplied here is met or we hit the retries limit.">
 <pre>
-until 
+until: result.stdout.find("all systems go") != -1
 </pre>
 </a>
 
