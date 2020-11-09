@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  gather_facts: yes
+
+  vars:
+    n: 7
+
+  tasks:
+    - name: Fail if space less than {{ n }} GiB
+      fail:
+        msg: Available space {{ mount.size_available|filesizeformat(true) }}, less than {{ n }} GiB 
+      vars:
+        mount: "{{ ansible_mounts | selectattr('mount', 'equalto', '/') | list | first }}"
+        free_gb: "{{ mount.size_available / 1024|pow(3) }}"
+      when: free_gb|int < n
