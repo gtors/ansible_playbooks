@@ -2,8 +2,23 @@
 - name: Up & Run the Clickhouse Server in Docker
   hosts: 127.0.0.1
   gather_facts: false
+
   vars:
     clickhouse_container: ch
+
+  vars_prompt:
+
+    - name: ch_host
+      prompt: Managed ClickHouse host?
+      private: no
+
+    - name: ch_user
+      prompt: Managed ClickHouse user?
+      private: no
+
+    - name: ch_database 
+      prompt: Managed ClickHouse database?
+      private: no
 
   pre_tasks:
 
@@ -43,6 +58,28 @@
         path: /etc/clickhouse-server/users.xml
         xpath: /yandex/users/default/access_management
         value: '1'
+      delegate_to: '{{ clickhouse_container }}'
+
+    - name: Install Yandex.Cloud cert
+      shell: |
+        mkdir -p ~/.clickhouse-client /usr/local/share/ca-certificates/Yandex
+        wget "https://storage.yandexcloud.net/cloud-certs/CA.pem" -O /usr/local/share/ca-certificates/Yandex/YandexInternalRootCA.crt 
+        wget "https://storage.yandexcloud.net/mdb/clickhouse-client.conf.example" -O ~/.clickhouse-client/config.xml
+      delegate_to: '{{ clickhouse_container }}'
+
+    - name: Create connect script to Managed ClickHouse
+      copy:
+        dest: "/usr/bin/connect.sh"
+        mode: 0755
+        content: |
+          #!/usr/bin/env sh
+          clickhouse-client \
+              --host {{ ch_host }} \
+              --secure \
+              --user {{ ch_user }} \
+              --database {{ ch_database }} \
+              --port 9440 \
+              --ask-password
       delegate_to: '{{ clickhouse_container }}'
 
   post_tasks:
